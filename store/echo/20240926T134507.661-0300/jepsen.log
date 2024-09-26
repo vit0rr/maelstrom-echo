@@ -1,0 +1,113 @@
+2024-09-26 13:45:07,690{GMT}	INFO	[jepsen test runner] jepsen.core: Test version 0b61ab573c6da835887b3f5ba5355b66c2fcafca (plus uncommitted changes)
+2024-09-26 13:45:07,691{GMT}	INFO	[jepsen test runner] jepsen.core: Command line:
+lein run test -w echo --bin ./main --node-count 1 --time-limit 10
+2024-09-26 13:45:07,720{GMT}	INFO	[jepsen test runner] jepsen.core: Running test:
+{:args []
+ :remote
+ #jepsen.control.retry.Remote{:remote #jepsen.control.scp.Remote{:cmd-remote #jepsen.control.sshj.SSHJRemote{:concurrency-limit 6,
+                                                                                                             :conn-spec nil,
+                                                                                                             :client nil,
+                                                                                                             :semaphore nil},
+                                                                 :conn-spec nil},
+                              :conn nil}
+ :log-net-send false
+ :node-count 1
+ :availability nil
+ :max-txn-length 4
+ :concurrency 1
+ :db
+ #object[maelstrom.db$db$reify__16142
+         "0x34d776eb"
+         "maelstrom.db$db$reify__16142@34d776eb"]
+ :max-writes-per-key 16
+ :leave-db-running? false
+ :name "echo"
+ :logging-json? false
+ :start-time
+ #object[org.joda.time.DateTime "0xd15f98a" "2024-09-26T13:45:07.661-03:00"]
+ :nemesis-interval 10
+ :net
+ #object[maelstrom.net$jepsen_net$reify__15251
+         "0x704c3ca2"
+         "maelstrom.net$jepsen_net$reify__15251@704c3ca2"]
+ :client
+ #object[maelstrom.workload.echo$client$reify__16863
+         "0x7d3a9061"
+         "maelstrom.workload.echo$client$reify__16863@7d3a9061"]
+ :barrier
+ #object[java.util.concurrent.CyclicBarrier
+         "0x2a2f7a61"
+         "java.util.concurrent.CyclicBarrier@2a2f7a61"]
+ :log-stderr false
+ :pure-generators true
+ :ssh {:dummy? true}
+ :rate 5
+ :checker
+ #object[jepsen.checker$compose$reify__11881
+         "0x8d40f07"
+         "jepsen.checker$compose$reify__11881@8d40f07"]
+ :argv
+ ("test" "-w" "echo" "--bin" "./main" "--node-count" "1" "--time-limit" "10")
+ :nemesis
+ (jepsen.nemesis.ReflCompose
+  {:fm {:start-partition 0,
+        :stop-partition 0,
+        :kill 1,
+        :start 1,
+        :pause 1,
+        :resume 1},
+   :nemeses [#unprintable "jepsen.nemesis.combined$partition_nemesis$reify__16416@196c8b93"
+             #unprintable "jepsen.nemesis.combined$db_nemesis$reify__16397@307ca947"]})
+ :nodes ["n0"]
+ :test-count 1
+ :latency {:mean 0, :dist :constant}
+ :bin "./main"
+ :generator
+ (jepsen.generator.TimeLimit
+  {:limit 10000000000,
+   :cutoff nil,
+   :gen (jepsen.generator.Any
+         {:gens [(jepsen.generator.OnThreads
+                  {:f #{:nemesis},
+                   :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                           "0x65c040c9"
+                                           "jepsen.generator.context$make_thread_filter$lazy_filter__9167@65c040c9"],
+                   :gen nil})
+                 (jepsen.generator.OnThreads
+                  {:f #jepsen.generator.context.AllBut{:element :nemesis},
+                   :context-filter #object[jepsen.generator.context$make_thread_filter$lazy_filter__9167
+                                           "0x11736ebc"
+                                           "jepsen.generator.context$make_thread_filter$lazy_filter__9167@11736ebc"],
+                   :gen (jepsen.generator.Stagger
+                         {:dt 400000000,
+                          :next-time nil,
+                          :gen (jepsen.generator.EachThread
+                                {:fresh-gen #object[maelstrom.workload.echo$workload$fn__16882
+                                                    "0x4a03c4bc"
+                                                    "maelstrom.workload.echo$workload$fn__16882@4a03c4bc"],
+                                 :context-filters #object[clojure.core$promise$reify__8591
+                                                          "0x3d0c88f4"
+                                                          {:status :pending,
+                                                           :val nil}],
+                                 :gens {}})})})]})})
+ :log-net-recv false
+ :os
+ #object[maelstrom.net$jepsen_os$reify__15254
+         "0x5aad4194"
+         "maelstrom.net$jepsen_os$reify__15254@5aad4194"]
+ :time-limit 10
+ :workload :echo
+ :consistency-models [:strict-serializable]
+ :topology :grid}
+
+2024-09-26 13:45:08,546{GMT}	INFO	[jepsen node n0] maelstrom.net: Starting Maelstrom network
+2024-09-26 13:45:08,547{GMT}	INFO	[jepsen test runner] jepsen.db: Tearing down DB
+2024-09-26 13:45:08,548{GMT}	INFO	[jepsen test runner] jepsen.db: Setting up DB
+2024-09-26 13:45:08,549{GMT}	INFO	[jepsen node n0] maelstrom.service: Starting services: (lin-kv lin-tso lww-kv seq-kv)
+2024-09-26 13:45:08,550{GMT}	INFO	[jepsen node n0] maelstrom.db: Setting up n0
+2024-09-26 13:45:08,550{GMT}	INFO	[jepsen node n0] maelstrom.process: launching ./main []
+2024-09-26 13:45:08,760{GMT}	INFO	[jepsen test runner] jepsen.core: Relative time begins now
+2024-09-26 13:45:08,772{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:echo	"Please echo 88"
+2024-09-26 13:45:08,776{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:ok	:echo	{:echo "Please echo 88", :in_reply_to 1, :msg_id 1, :type "echo_ok"}
+2024-09-26 13:45:09,144{GMT}	INFO	[jepsen worker 0] jepsen.util: 0	:invoke	:echo	"Please echo 48"
+2024-09-26 13:45:09,144{GMT}	INFO	[Jepsen shutdown hook] jepsen.core: Downloading DB logs before JVM shutdown...
